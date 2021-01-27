@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="/_images/lens.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Try PathoSpotter</title>
+
+    <!-- Importação do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+
+    <!-- Tag para zoom mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+    <!-- NavBar -->
+    <nav class="navbar navbar-light" style="background-color: #587B7F;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="/_images/lens.png" alt="Logo do projeto PathoSpotter" width="" height="33"
+                    class="d-inline-block align-top">
+                Try PathoSpotter
+            </a>
+        </div>
+    </nav>
+
+    <!-- Corpo do Site -->
+    <div class="container-fluid">
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <!-- Aviso de Função -->
+                <p class="lead">Please, wait some seconds to receive the result. The Pathospotter web service will
+                    indicate if there is some kind of hypercellularity or sclerosis glomerular lesion. For better
+                    accuracy, submit only images with one glomerulus stained using Hematoxylin and Eosin (H&E) or
+                    Periodic Acid-Schiff (PAS).</p>
+                <!-- File Input -->
+                <form class="row g-3">
+                    <div class="col-md-6">
+                        <input class="form-control" id="imgsubmit" type="file" onchange="loadFile(event)">
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary">Submit File</button>
+                    </div>
+                    <div class="col-md-12" id="preview-img">
+                        <img id="output"/>
+                    </div>
+                </form>
+
+                <script>
+                    var loadFile = function (event) {
+                        var reader = new FileReader();
+                        reader.onload = function () {
+                            var output = document.getElementById('output');
+                            output.src = reader.result;
+                        };
+                        reader.readAsDataURL(event.target.files[0]);
+                    };
+                </script>
+
+                <br>
+                <hr>
+                <div class="w-50 p-3 bg-light">
+                    <p><small class="text-muted">Legal Notice</small></p>
+                    <p class="text-secondary">The information contained on this site, or provided by its request, is
+                        provided for informational or academical purposes only and is not intended to be a medical or
+                        health advice. We do not send or sell this information for the purpose of diagnosis, treatment,
+                        cure or prevention of any disease. We do not recommend any particular form of medical treatment
+                        or that people administer their own health problems without the advice of a licensed health
+                        professional. Information found or received through this site should not be used in lieu of a
+                        visit, call, consultation or advice from a health care provider. If you suspect you have a
+                        medical problem, or if you have any questions about your health care, call or see your doctor.
+                    </p>
+                    <p class="text-secondary">This site, or any part thereof, may not be reproduced, duplicated, copied,
+                        sold, resold, visited or otherwise exploited for any commercial purpose without the express
+                        written consent of the persons responsible for the Pathospotter Project. You may not use any
+                        "meta tag" or any other "hidden text" using the Pathospotter name or trademark without the
+                        express written consent of the project's owners. Any unauthorised use will be subject to
+                        investigation and application of legal penalties.</p>
+                    <p class="text-secondary">As a condition of your use of this site, you warrant that you will not use
+                        it for any purpose that is unlawful or prohibited by this notice. You may not use this site in
+                        any manner that damages, disables, overburden, or harms you. You may not obtain, or attempt to
+                        obtain, through this site, materials or information by any means that has not been intentionally
+                        made available or provided through it.</p>
+                    <p class="text-secondary">By submitting an image for review, you agree that the Pathospotter Project
+                        may use it, free of any liens or legal obligation to you, the author of the image, or the owner
+                        of the image direct use of the image; in order to develop, test and improve their algorithms,
+                        including conducting surveys, and testing and solving problems related to the operation of
+                        systems and products related to the PathoSpotter Project. If you do not own the image rights you
+                        have submitted, you may be legally responsible for using this image without the permission of
+                        the owners of image's rights and subject to appropriate legal penalties.</p>
+                    <p class="text-secondary">This site collects information from and about computers, smartphones, and
+                        other devices used to connect to this page, and uses this information for security control and
+                        to monitor and enhance products and systems related to the PathoSpotter Project.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
