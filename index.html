@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Try PathoSpotter</title>
 
+    <!-- Importação da Folha de Estilo -->
+    <link rel="stylesheet" href="_style/style.css">
+
     <!-- Importação do Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -15,8 +18,15 @@
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
 
+    <!-- Importação do Tensorflow -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+
     <!-- Tag para zoom mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Funções de botões e disparidades -->
+    <script src="_scripts/imageHandler.js"></script>
+    <script src="_scripts/interfaceHandler.js"></script>
 </head>
 
 <body>
@@ -32,39 +42,35 @@
         </div>
     </nav>
 
+
     <!-- Corpo do Site -->
     <div class="container-fluid">
 
         <div class="card mt-3">
             <div class="card-body">
+
                 <!-- Aviso de Função -->
                 <p class="lead">Please, wait some seconds to receive the result. The Pathospotter web service will
                     indicate if there is some kind of hypercellularity or sclerosis glomerular lesion. For better
                     accuracy, submit only images with one glomerulus stained using Hematoxylin and Eosin (H&E) or
                     Periodic Acid-Schiff (PAS).</p>
                 <!-- File Input -->
-                <form class="row g-3">
-                    <div class="col-md-6">
-                        <input class="form-control" id="imgsubmit" type="file" onchange="loadFile(event)">
-                    </div>
-                    <div class="col-md-6">
-                        <button type="submit" class="btn btn-primary">Submit File</button>
-                    </div>
-                    <div class="col-md-12" id="preview-img">
-                        <img id="output"/>
-                    </div>
-                </form>
-
-                <script>
-                    var loadFile = function (event) {
-                        var reader = new FileReader();
-                        reader.onload = function () {
-                            var output = document.getElementById('output');
-                            output.src = reader.result;
-                        };
-                        reader.readAsDataURL(event.target.files[0]);
-                    };
-                </script>
+                <div id="input-div">
+                    <form class="row g-3">
+                        <div class="col-md-6">
+                            <input class="form-control" id="imgsubmit" type="file" onchange="loadFile(event)">
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary" onclick="preprocessFile()">Submit
+                                File</button>
+                        </div>
+                        <!-- Divisão de Alerta -->
+                        <div id="alert_placeholder"></div>
+                        <div class="col-md-12" id="preview-img">
+                            <img id="output" class="preview" />
+                        </div>
+                    </form>
+                </div>
 
                 <br>
                 <hr>
