@@ -27,6 +27,7 @@
     <!-- Funções de botões e disparidades -->
     <script src="_scripts/imageHandler.js"></script>
     <script src="_scripts/interfaceHandler.js"></script>
+    <script src="_scripts/modelHandler.js"></script>
 </head>
 
 <body>
@@ -61,15 +62,42 @@
                             <input class="form-control" id="imgsubmit" type="file" onchange="loadFile(event)">
                         </div>
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary" onclick="preprocessFile()">Submit
+                            <button type="button" class="btn btn-danger" onclick="preprocessFile()">Submit
                                 File</button>
                         </div>
                         <!-- Divisão de Alerta -->
                         <div id="alert_placeholder"></div>
-                        <div class="col-md-12" id="preview-img">
-                            <img id="output" class="preview" />
-                        </div>
                     </form>
+                </div>
+                <!-- Preview da Imagem -->
+                <div class="col-md-12" id="preview-img">
+                    <img id="output" class="preview" />
+                </div>
+                <!-- Div do Spinner -->
+                <div class="d-flex justify-content-center">
+                    <div id="spinner" class="spinner-border text-danger hidden" role="status">
+                    </div>
+                </div>
+                <!-- Div de Resultado -->
+                <div id="resultTable" class="hidden">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Hipercelularidade</th>
+                                <th scope="col">Esclerose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div id="hiperResult-div"></div>
+                                </td>
+                                <td>
+                                    <div id="scleResult-div"></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <br>

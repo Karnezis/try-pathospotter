@@ -5,3 +5,7 @@ img.preview {
     margin-right: auto;
     padding: 10px;
 }
+
+div.hidden{
+    display: none;
+}
