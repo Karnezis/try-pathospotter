@@ -21,7 +21,7 @@ var preprocessFile = function (){
     var file = document.getElementById('imgsubmit').files[0]; // Pega os arquivos do input
     // Pega o tipo do arquivo
     var fileType = file.type;
-    console.log(fileType);
+    //console.log(fileType);
     const acceptedImageTypes = ['image/jpeg', 'image/png']; // Tipos de imagem suportadas
     if (!acceptedImageTypes.includes(fileType.toLowerCase()) || !fileType==='image/tiff') { // Verifica se é uma imagem inválida
         bootstrap_alert.warning(`O arquivo ${file.name} não é uma imagem válida.`); // Alerta o usuário de que a imagem é inválida
@@ -37,11 +37,21 @@ var preprocessFile = function (){
             image.src = reader.result; // Pega a imagem do arquivo lido
             image.onload = async function (e) { // Ao carregar a imagem com sucesso
                 let canvas = document.createElement('canvas'); // Cria um Canvas
-                canvas.width = 224; // Define a altura do canvas como a desejada
-                canvas.height = 224; // Define a largura do canvas como a desejada
+                canvas.setAttribute("id", "canvasID");
+                canvas.width = 224; //this.width; // Define a altura do canvas como a desejada
+                canvas.height = 224; //this.height; // Define a largura do canvas como a desejada
                 let ctx = canvas.getContext("2d"); // Pega o contexto do Canvas
                 ctx.drawImage(this, 0, 0, 224, 224); // Desenha a imagem no contexto
                 canvas.toDataURL(fileType); // O arquivo final é jogado no Canvas
+
+                /*
+                // OpenCV fazendo o redimensionamento da imagem
+                let src = cv.imread(canvas);
+                let dst = new cv.Mat();
+                let dsize = new cv.Size(224, 224);
+                cv.resize(src, dst, dsize, 0, 0, cv.INTER_LINEAR);
+                cv.imshow(canvas, dst);
+                */
 
                 // Pega os dados da imagem do canvas
                 let imagem = ctx.getImageData(0, 0, canvas.height, canvas.width);
@@ -53,9 +63,9 @@ var preprocessFile = function (){
                 // Checa se os dados dentro do Tensor não são nulos
                 if (inputTensor.dataSync() != null) {
                     // Redimensiona o Tensor para o tamanho da rede
-                    intputTensor = inputTensor.resizeNearestNeighbor([224, 224]);
+                    // inputTensor = inputTensor.resizeNearestNeighbor([224, 224]);
                     // Pega os valores em float do tensor
-                    inputTensor = inputTensor.toFloat();
+                    // inputTensor = inputTensor.toFloat();
                     // Passa o tensor para ser predito pela rede
                     let hiperResult = await hiperPredict(inputTensor);
                     let scleResult = await sclerosisPredict(inputTensor);

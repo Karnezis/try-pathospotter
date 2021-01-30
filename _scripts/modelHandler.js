@@ -1,4 +1,3 @@
-
 /**
  * Função que: pré-processa a imagem para alimentar a rede de hipercelularidade;
  * importa o modelo para a memória do programa;
@@ -7,9 +6,13 @@
  * @param {*} image Imagem que desejamos prever a classe.
  */
 async function hiperPredict(image) {
+    // Redimensionamento da imagem
+    // image = tf.image.resizeBilinear(image, [224, 224])
     // Normalização do Modelo de Hipercelularidade
     const norm = tf.scalar(255);
     image = image.div(norm);
+    // Conversão para Float
+    image = image.toFloat();
     // Expansão de dimensões
     image = image.expandDims();
     // Carregando o Modelo de Hipercelularidade
@@ -17,6 +20,7 @@ async function hiperPredict(image) {
     //console.log("Modelo carregado.")
     // Realiza a Predição
     let predict = await hiper_model.predict(image);
+    //predict.print();
     // Pega do vetor de possibilidades de classes
     // Vê qual das classes tem a maior probabilidade
     let classe = predict.argMax(1);
@@ -34,6 +38,8 @@ async function hiperPredict(image) {
  * @param {*} image Imagem que desejamos prever a classe.
  */
 async function sclerosisPredict(image) {
+    // Redimensionamento da imagem
+    //image = tf.image.resizeBilinear(image, [224, 224])
     // Normalização do Modelo de Esclerose
     const norm = tf.scalar(255);
     image = image.div(norm);
