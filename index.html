@@ -51,10 +51,14 @@
             <div class="card-body">
 
                 <!-- Aviso de Função -->
-                <p class="lead">Please, wait some seconds to receive the result. The Pathospotter web service will
-                    indicate if there is some kind of hypercellularity or sclerosis glomerular lesion. For better
-                    accuracy, submit only images with one glomerulus stained using Hematoxylin and Eosin (H&E) or
-                    Periodic Acid-Schiff (PAS).</p>
+                <div class="card">
+                    <h5 class="card-header">Welcome to Try PathoSpotter</h5>
+                    <div class="card-body">
+                      <h5 class="card-title">Please, wait some seconds to receive the result.</h5>
+                      <p class="card-text">The Pathospotter web service will indicate if there is some kind of hypercellularity or sclerosis glomerular lesion. For better accuracy, submit only images with one glomerulus stained using Hematoxylin and Eosin (H&E) or Periodic Acid-Schiff (PAS).</p>
+                    </div>
+                  </div>
+                  <br>
                 <!-- File Input -->
                 <div id="input-div">
                     <form class="row g-3">
@@ -98,6 +102,13 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <!-- Div de Tentar Novamente -->
+                <div class="hidden" id="tryagain">
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button class="btn btn-primary btn-outline-danger" style="background-color: white;"
+                            type="button" onclick="tryAgain()">Submeter Nova Imagem</button>
+                    </div>
                 </div>
 
                 <br>

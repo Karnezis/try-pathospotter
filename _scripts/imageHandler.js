@@ -1,3 +1,8 @@
+/**
+ * Função que dá o preview da imagem quando o usuário realiza
+ * o upload da mesma.
+ * @param {*} event Evento de escolha de imagem.
+ */
 var loadFile = function (event) {
     var reader = new FileReader();
     reader.onload = function () {
@@ -7,6 +12,11 @@ var loadFile = function (event) {
     reader.readAsDataURL(event.target.files[0]);
 };
 
+/**
+ * Função que pré-processa o arquivo, transformando
+ * um arquivo de imagem em um Tensor para ser passado
+ * para a rede neural.
+ */
 var preprocessFile = function (){
     var file = document.getElementById('imgsubmit').files[0]; // Pega os arquivos do input
     // Pega o tipo do arquivo
@@ -14,8 +24,9 @@ var preprocessFile = function (){
     console.log(fileType);
     const acceptedImageTypes = ['image/jpeg', 'image/png']; // Tipos de imagem suportadas
     if (!acceptedImageTypes.includes(fileType.toLowerCase()) || !fileType==='image/tiff') { // Verifica se é uma imagem inválida
-        bootstrap_alert.warning(`O arquivo ${file.name} não é uma imagem válida.`);
+        bootstrap_alert.warning(`O arquivo ${file.name} não é uma imagem válida.`); // Alerta o usuário de que a imagem é inválida
     } else {
+        // Esconde a div de input e mostra o spinner enquanto o programa calcula os dados
         toggleDiv('input-div');
         toggleDiv('spinner');
         let reader = new FileReader(); // Novo leitor de arquivo
@@ -48,12 +59,18 @@ var preprocessFile = function (){
                     // Passa o tensor para ser predito pela rede
                     let hiperResult = await hiperPredict(inputTensor);
                     let scleResult = await sclerosisPredict(inputTensor);
+                    // Mostra os resultados das redes na interface
                     showHiperResult(hiperResult);
                     showScleResult(scleResult);
-                    console.log(hiperResult);
-                    console.log(scleResult);
+                    // Debug
+                    //console.log(hiperResult);
+                    //console.log(scleResult);
+                    // Esconde o spinner
                     toggleDiv("spinner");
+                    // Mostra os resultados
                     toggleDiv("resultTable");
+                    // Mostra o Tentar Novamente
+                    toggleDiv("tryagain");
                     // Limpando espaço da memória
                     tf.disposeVariables();
                     tf.engine().endScope();

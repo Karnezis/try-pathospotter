@@ -1,3 +1,11 @@
+
+/**
+ * Função que: pré-processa a imagem para alimentar a rede de hipercelularidade;
+ * importa o modelo para a memória do programa;
+ * prevê o resultado da imagem no modelo;
+ * trata os dados do resultado da predição.
+ * @param {*} image Imagem que desejamos prever a classe.
+ */
 async function hiperPredict(image) {
     // Normalização do Modelo de Hipercelularidade
     const norm = tf.scalar(255);
@@ -9,13 +17,22 @@ async function hiperPredict(image) {
     //console.log("Modelo carregado.")
     // Realiza a Predição
     let predict = await hiper_model.predict(image);
-    // Pega do vetor de possibilidades a classe correta
+    // Pega do vetor de possibilidades de classes
+    // Vê qual das classes tem a maior probabilidade
     let classe = predict.argMax(1);
+    // Pega os dados do tensor de classe e retorna
     const predictData = classe.dataSync();
     //predict.argMax(1).print();
     return predictData[0];
 }
 
+/**
+ * Função que: pré-processa a imagem para alimentar a rede de esclerose;
+ * importa o modelo para a memória do programa;
+ * prevê o resultado da imagem no modelo;
+ * trata os dados do resultado da predição.
+ * @param {*} image Imagem que desejamos prever a classe.
+ */
 async function sclerosisPredict(image) {
     // Normalização do Modelo de Esclerose
     const norm = tf.scalar(255);
@@ -26,6 +43,8 @@ async function sclerosisPredict(image) {
     let sclerosis_model = await tf.loadLayersModel('_models/sclerosis_model/model.json');
     // Realiza a Predição
     let predict = await sclerosis_model.predict(image);
+    // Pega os dados do tensor predito, no caso, a probabilidade de ter sclerose
     const predictData = predict.dataSync();
+    // Retorna somente a probabilidade
     return predictData[0];
 }
