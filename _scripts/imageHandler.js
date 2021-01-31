@@ -35,7 +35,7 @@ var preprocessFile = function (){
         let reader = new FileReader(); // Novo leitor de arquivo
         reader.onloadend = function () {
             // Começa um escopo de variáveis do Tensorflow, para poupar espaço
-            tf.engine().startScope();
+            //tf.engine().startScope();
             let image = new Image(); // Faz um novo elemento da classe Imagem
             image.src = reader.result; // Pega a imagem do arquivo lido
             image.onload = async function (e) { // Ao carregar a imagem com sucesso
@@ -89,8 +89,8 @@ var preprocessFile = function (){
                     // Mostra o Tentar Novamente
                     toggleDiv("tryagain");
                     // Limpando espaço da memória
-                    tf.disposeVariables();
-                    tf.engine().endScope();
+                    //tf.disposeVariables();
+                    //tf.engine().endScope();
                 }
             }
         }

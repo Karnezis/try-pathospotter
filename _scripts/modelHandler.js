@@ -1,6 +1,12 @@
 var hiper_model;
 var sclerosis_model;
 
+/**
+ * Função retirada da documentação do Tensorflow JavaScript,
+ * https://www.tensorflow.org/js/guide/platform_environment?hl=pt-br
+ * que "aquece" o modelo de forma que este seja mais rápido na segunda previsão.
+ * Diminui em média o tempo de previsão para a metade.
+ */
 async function warmUp() {
     hiper_model = await tf.loadLayersModel('_models/hiper_model/model.json');
     sclerosis_model = await tf.loadLayersModel('_models/sclerosis_model/model.json');
