@@ -74,8 +74,8 @@ var preprocessFile = function (){
                     // Pega os valores em float do tensor
                     // inputTensor = inputTensor.toFloat();
                     // Passa o tensor para ser predito pela rede
-                    let hiperResult = await hiperPredict(inputTensor);
-                    let scleResult = await sclerosisPredict(inputTensor);
+                    hiperResult = await hiperPredict(inputTensor);
+                    scleResult = await sclerosisPredict(inputTensor);
                     // Mostra os resultados das redes na interface
                     showHiperResult(hiperResult);
                     showScleResult(scleResult);
@@ -89,6 +89,9 @@ var preprocessFile = function (){
                     // Mostra o Tentar Novamente
                     toggleDiv("tryagain");
                     // Limpando espaço da memória
+                    inputTensor.dispose();
+                    delete(hiperResult);
+                    delete(scleResult);
                     //tf.disposeVariables();
                     //tf.engine().endScope();
                 }
